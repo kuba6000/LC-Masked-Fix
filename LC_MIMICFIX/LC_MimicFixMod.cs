@@ -2,12 +2,6 @@
 using BepInEx.Logging;
 using HarmonyLib;
 using LC_MIMICFIX.Patches;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 
 namespace LC_MIMICFIX
 {
@@ -16,7 +10,7 @@ namespace LC_MIMICFIX
     {
         private const string ModGUID = "kuba6000.LC_MimicFixMod";
         private const string ModName = "LC_Masked_Fix";
-        private const string ModVersion = "0.0.1";
+        private const string ModVersion = "0.0.2";
         private readonly Harmony harmony = new Harmony(ModGUID);
 
         public static LC_MimicFixMod instance;
@@ -28,6 +22,8 @@ namespace LC_MIMICFIX
             log = BepInEx.Logging.Logger.CreateLogSource(ModGUID);
 
             log.LogInfo("Mimic Fix Awaken!");
+            log.LogInfo("V47/48/49 - Fixes red screen overlay / vomit screen after the kill is inturrupted");
+            log.LogInfo("V45 - Fixes stuck screen after interrupting the kill animation");
             log.LogInfo("Patching MaskedPlayerEnemy");
 
             harmony.PatchAll(typeof(LC_MimicFixMod));

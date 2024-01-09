@@ -1,15 +1,11 @@
 ﻿using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LC_MIMICFIX.Patches
 {
     [HarmonyPatch(typeof(MaskedPlayerEnemy))]
     internal class MaskedPlayerEnemyPatch
     {
+
         [HarmonyPatch(nameof(MaskedPlayerEnemy.CancelSpecialAnimationWithPlayer))]
         [HarmonyPrefix]
         static bool CancelSpecialAnimationWithPlayerPatch(MaskedPlayerEnemy __instance)
@@ -21,8 +17,9 @@ namespace LC_MIMICFIX.Patches
                 HUDManager.Instance.HideHUD(true);
                 HUDManager.Instance.HideHUD(false);
             }
-            LC_MimicFixMod.instance.log.LogInfo("Directly finishing kill animation");
+            //LC_MimicFixMod.instance.log.LogInfo("Directly finishing kill animation");
             __instance.FinishKillAnimation();
+            __instance.inSpecialAnimationWithPlayer = null;
             return false; // Do not execute original code
         }
 
